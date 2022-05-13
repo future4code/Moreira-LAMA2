@@ -1,5 +1,5 @@
 import { IUserData } from "../model/interfaceUserData";
-import User from "../model/User";
+import User, { USER_ROLES } from "../model/User";
 import { Authenticator } from "../services/Authenticator";
 import { HashManager } from "../services/HashManager";
 import { IdGenerator } from "../services/IdGenerator";
@@ -20,8 +20,8 @@ export default class UserBusiness{
     }
 
     signup = async (input:SignupInputDTO) =>{
-        //validacao
-        const {name, email, password} = input
+        //validacao        
+        const {name, email, password, role} = input
         if(!email || !name || !password ){
             throw new Error("Campos inválidos")
         }
@@ -43,11 +43,12 @@ export default class UserBusiness{
             id,
             name,
             email,
-            hashedPassword            
+            hashedPassword,
+            role            
         )
         await this.userData.insertUser(user)
         //criar o token
-        const token = this.authenticator.generateToken({id})
+        const token = this.authenticator.generateToken({id, role})
         //retornar o token
         return token
     }
@@ -70,7 +71,7 @@ export default class UserBusiness{
             throw new Error('Email ou senha incorretos.')
         }
         const authenticator = new Authenticator()
-        const token = this.authenticator.generateToken({id: registeredUser.id})
+        const token = this.authenticator.generateToken({id: registeredUser.id, role: registeredUser.role})
         return token
     }
 }

@@ -2,8 +2,8 @@ POST http://localhost:3003/user/signup
 Content-Type: application/json
 
 {
-   "name": "Sergio", 
-   "email": "sergio@gmail.com",
+   "name": "Eliel", 
+   "email": "eliel@gmail.com",
    "password": "123456",
    "role": "ADMIN"   
 }
@@ -13,7 +13,18 @@ POST http://localhost:3003/login
 Content-Type: application/json
 
 {   
-   "email": "jaime@gmail.com",
+   "email": "sergio@gmail.com",
    "password": "123456"
+}
+
+###
+POST http://localhost:3003/band/signup
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImIwOGUwYTQ1LWZiODYtNDMyNS04OWQxLTlhN2QwYmY2NDcwMSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY1MjQ2NzE1OCwiZXhwIjoxNjUyNTUzNTU4fQ.T2VM-5NI7bdrmkN8qRMmRdIrydn0ADCJGuBpzO2UzP8
+
+{
+   "name": "Paralamas do Sucesso",
+   "music_genre": "Rock PoP",
+   "responsible": "Hebert Vianna"
 }
 

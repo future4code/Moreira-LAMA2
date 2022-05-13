@@ -8,17 +8,17 @@ export default class UserController{
     ){}
 
     signup = async(req: Request, res: Response) =>{
-        const {name, email, password} = req.body;
+        const {name, email, password, role} = req.body;
 
         const input: SignupInputDTO ={
             name,
             email,
-            password,            
+            password,
+            role            
         }
         try {
-            console.log(1)
             const token = await this.userBusiness.signup(input)
-            console.log(2)
+            
             res.status(201).send({message: "Usuário cadastrado com sucesso", token})
             
         } catch (error) {
