@@ -1,7 +1,3 @@
-export type authenticationData = {
-    id: string
-}
-
 export enum USER_ROLES {
     NORMAL = "NORMAL",
     ADMIN = "ADMIN",
@@ -44,7 +40,7 @@ export default class User{
         private _name: string,
         private _email: string,
         private _password: string,
-        private _role?: USER_ROLES
+        private _role: USER_ROLES
     ){}
 }
 
