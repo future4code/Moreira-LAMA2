@@ -31,4 +31,9 @@ export default class Band {
     public set responsible(value: string) {
         this._responsible = value
     }
+
+    static toBandModel(band: any): Band {
+        return new Band(band.id, band.name, band.music_genre, band.responsible);
+      }
 }
+

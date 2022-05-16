@@ -1,5 +1,6 @@
 import Band from "../model/Band"
 import { IBandData } from "../model/interfaceBandData"
+import { toBandModel } from "../types/signupBandDTO"
 import { BaseDatabase } from "./BaseDatabase"
 
 export default class BandData extends BaseDatabase implements IBandData {
@@ -41,4 +42,21 @@ export default class BandData extends BaseDatabase implements IBandData {
             }
         }
     }
+     search = async (id:string, name: string): Promise<Band> => {
+        try{
+          const queryResult = await this
+          .connection(this.TABLE_NAME)
+          .select('*')
+          .where({name})
+          return queryResult[0] 
+    
+        } catch (error: any){
+            if (error instanceof Error) {
+                throw new Error(error.message)
+            } else {
+                throw new Error("Erro do banco !")
+            }
+        } 
+      }
 }
+

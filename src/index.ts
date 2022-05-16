@@ -28,3 +28,4 @@ app.post("/user/signup", userController.signup)
 app.post("/login", userController.login)
 
 app.post("/band/signup", bandController.signup)
+app.get("/band/search/:name", bandController.search)

@@ -28,3 +28,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImIwOGUwYTQ1LWZiODYt
    "responsible": "Hebert Vianna"
 }
 
+###
+GET http://localhost:3003/band/search/Capital Inicial
+Content-Type: application/json
+

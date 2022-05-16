@@ -41,6 +41,6 @@ export default class User{
         private _email: string,
         private _password: string,
         private _role: USER_ROLES
-    ){}
+    ){}   
 }
 
