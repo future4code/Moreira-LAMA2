@@ -1,9 +1,12 @@
 import { Request, Response } from "express";
 import BandBusiness from "../business/BandBusiness";
+import BandData from "../data/BandData";
+import Band from "../model/Band";
 import { Authenticator } from "../services/Authenticator";
-import { SignupBandDTO } from "../types/signupBandDTO";
+import { SearchOutPutDTO, SignupBandDTO } from "../types/signupBandDTO";
 
 export default class BandController{
+    
     constructor(
         private bandBusiness: BandBusiness
     ){}
@@ -41,4 +44,29 @@ export default class BandController{
             res.status(500).send("Erro no signup")
         }
     }
+
+    search = async(req: Request, res: Response) =>{
+        try {
+            const { name } = req.params            
+           
+            const input: SignupBandDTO ={
+                id: req.params.id,
+                name: req.params.name,
+                music_genre: req.params.music_genre,
+                responsible: req.params.responsible
+            }
+          
+            const getBand = await this.bandBusiness.search(input)
+            console.log(getBand)            
+
+            res.status(200).send({message: "sucess in search", getBand})
+
+        } catch(error){
+            if (error instanceof Error) {
+                return res.status(400).send(error.message)
+            }
+            res.status(500).send("Erro no search")
+        }    
+    }
 }
+

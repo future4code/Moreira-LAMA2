@@ -3,7 +3,8 @@ import Band from "../model/Band";
 import { Authenticator } from "../services/Authenticator";
 import { HashManager } from "../services/HashManager";
 import { IdGenerator } from "../services/IdGenerator";
-import { SignupBandDTO } from "../types/signupBandDTO";
+import { SearchOutPutDTO, SignupBandDTO } from "../types/signupBandDTO";
+import BandData from "../data/BandData";
 
 export default class BandBusiness{
 
@@ -32,10 +33,10 @@ export default class BandBusiness{
             throw new Error("Banda já cadastrada")
         }
 
-        //criar uma id pro usuario
+        //criar uma id da banda
         const id = this.idGenerator.generateId()
 
-        //criar o usuario no banco
+        //criar a banda no banco
         const band = new Band(
             id,
             name,
@@ -44,4 +45,16 @@ export default class BandBusiness{
         )
         await this.bandData.insertBand(band)        
     }
+
+    search = async (input:SignupBandDTO) =>{
+      const { id, name, music_genre, responsible } = input
+        if(!name ){
+            throw new Error("Banda não encontrada")
+        }
+        const registeredBand = await this.bandData.search(id, name)
+
+        
+        return registeredBand
+    }
+
 }
